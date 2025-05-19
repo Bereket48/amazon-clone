@@ -1,0 +1,29 @@
+import React from "react";
+import { categoryInfos } from "./categoryFullInfos";
+import CategoryCard from "./CategoryCard";
+import classes from "./Category.module.css";
+function Category() {
+  return (
+    <>
+      <section className={classes.category_container}>
+        {categoryInfos.map((infos, index) => {
+          return <CategoryCard data={infos} key={index} />;
+        })}
+      </section>
+    </>
+  );
+}
+
+export default Category;
+
+// function Category() {
+//   return (
+//     <section>
+//       {categoryInfos.map((infos, index) => (
+//         <CategoryCard key={index} data={infos} />
+//       ))}
+//     </section>
+//   );
+// }
+
+// export default Category;----------------better and simple code (uses implicit return with ())

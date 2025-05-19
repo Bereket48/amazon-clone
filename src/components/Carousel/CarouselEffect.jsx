@@ -11,7 +11,7 @@ function CarouselEffect() {
       <Carousel
         autoPlay={true}
         infiniteLoop={true}
-        showIndicators={false} //showIndicators not showIndicator
+        showIndicators={false} //showIndicators with -s
         showThumbs={false}
       >
         {img.map((imageItemLink) => {
@@ -19,7 +19,6 @@ function CarouselEffect() {
         })}
       </Carousel>
       <div className={classes.hero_img}></div>
-      <div>Heloffdbfbksbfskbfis</div>
     </>
   );
 }
