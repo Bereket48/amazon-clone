@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       {/* <Header />
-      <CarouselEffect /> 
+      <CarouselEffect /> ....these three lines are replaced with Landing component which is embeded with LayOut component
       <Category />
       <Product /> */}
       <Routing />

@@ -1,16 +1,18 @@
 import React from "react";
 import classes from "./Category.module.css"
+import { Link } from "react-router-dom";
 function CategoryCard({ data }) {
   return (
     <>
       <div className={classes.category}>
-        <a href="">
+        <Link to={`/category/${data.name}`}>
+          {/* The route address "/category/${data.name}" in addition to routing to the address, displays "/category/+ a dynamic endpoint" on the browser's navigation bar when any of it's different rendered card is clicked */}
           <span>
             <h2>{data.title}</h2>
           </span>
           <img src={data.imgLink} alt={data.title} />
           <p>shop now</p>
-        </a>
+        </Link>
       </div>
     </>
   );
