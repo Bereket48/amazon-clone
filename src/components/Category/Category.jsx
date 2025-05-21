@@ -6,7 +6,7 @@ function Category() {
   return (
     <>
       <section className={classes.category_container}>
-        {categoryInfos.map((infos, index) => {          
+        {categoryInfos.map((infos, index) => {          //Mapping on locally sourced &/or static data
           return <CategoryCard data={infos} key={index} />;
         })}
       </section>

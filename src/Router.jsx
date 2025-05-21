@@ -7,6 +7,7 @@ import Payment from "./Pages/Payment/Payment";
 import Orders from "./Pages/Orders/Orders";
 import Cart from "./Pages/Cart/Cart";
 import Results from "./Pages/Results/Results";
+import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 function Routing() {
   return (
     <Router>
@@ -21,6 +22,11 @@ function Routing() {
         <Route path="/category/:BereketEndPoint" element={<Results />} />
         {/* Here we are saying whenever anything comes after "/category/", then route to the "Results" page. 
         The variable BereketEndPoint gets dynamic values either from what a user writes or from a clicked route from the CategoryCard, which maps and take varying data on it's four d/t components.*/}
+        <Route path="/products/:productId" element={<ProductDetail />} />
+{/*     Likewise when any of the rendered ProductCards gets a click, it's "Link"
+        attribute writes and links to a url endpoint `/products/${id}`, and
+        because this url pattern would eventually match to the route path provided here above as <Route path="/products/:productId" element...., our Router would take us to "ProductDetail" page*/}
+
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
