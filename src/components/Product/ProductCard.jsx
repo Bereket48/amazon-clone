@@ -5,7 +5,7 @@ import classes from "./Product.module.css";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 // npm install numeral ------install from Numeral.js for the rating counter
-function ProductCard({ product }) {
+function ProductCard({ product, flex }) {
   const { image, title, id, rating, price } = product; //Destructuring the prop "product"
 
   return (
@@ -17,8 +17,8 @@ function ProductCard({ product }) {
         <h3>{title}</h3>
         <div className={classes.rating}>
           {/* rating */}
-          <Rating value={rating.rate} precision={0.1} /> {/*count */}
-          <small>{rating.count}</small>
+          <Rating value={rating?.rate} precision={0.1} /> {/*count */}
+          <small>{rating?.count}</small>
         </div>
         <div>
           {/* price */}
@@ -30,3 +30,10 @@ function ProductCard({ product }) {
   );
 }
 export default ProductCard;
+
+//Note that this component is going to be used by any component who includes it in its return statement and gives it the same prop named "product" as follows
+// return (
+//   ...... other code (if any)
+//     <ProductCard product={the data with image, title, id, rating & price in it} />
+//     ..... other code (if any)
+// );
