@@ -5,16 +5,21 @@ import classes from "./Product.module.css";
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 // npm install numeral ------install from Numeral.js for the rating counter
-function ProductCard({ product, flex }) {
-  const { image, title, id, rating, price } = product; //Destructuring the prop "product"
+function ProductCard({ product, flex, renderDesc }) {
+  const { image, title, id, rating, price, description } = product; //Destructuring the prop "product"
 
   return (
-    <div className={`${classes.card_container}`}>
+    <div
+      className={`${classes.card_container} ${
+        flex ? classes.product_flexed : ""
+      }`}
+    >
       <Link to={`/products/${id}`}>
         <img src={image} alt="" />
       </Link>
       <div>
         <h3>{title}</h3>
+        {renderDesc && <div style={{ maxWidth: "750px" }}>{description}</div>}
         <div className={classes.rating}>
           {/* rating */}
           <Rating value={rating?.rate} precision={0.1} /> {/*count */}

@@ -9,14 +9,13 @@
 .card_container:hover .button {
   display: block;
 }
-.card_container img {      
+.card_container img {
   /* not .card__container */
   padding: 10px;
   width: 100%;
   height: 200px;
   object-fit: contain;
-} 
-
+}
 
 .button {
   display: none;
@@ -41,7 +40,7 @@
   padding: 10px 0px;
 }
 
-.products_container{
+.products_container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   /* minmax(250px, 1fr) */
@@ -53,4 +52,38 @@
 
 .products_container section {
   margin: 0 auto;
+}
+
+.product_flexed {
+  box-shadow: none;
+  height: auto;
+  display: flex;
+  gap: 50px;
+  width: 100%;
+}
+
+.product_flexed h3 {
+  padding: 20px 0px;
+}
+
+.product_flexed .button {
+  display: block;
+  position: static;
+  width: 150px;
+  margin-right: 40px;
+}
+.product_flexed {
+  height: 50vh;
+}
+.product_flexed img {
+  width: 300px !important;
+  height: auto;
+}
+
+@media screen and (max-width: 768px){
+  .product_flexed {
+    display: flex;
+    flex-direction: column;
+    }
+
 }
