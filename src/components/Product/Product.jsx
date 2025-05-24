@@ -31,7 +31,6 @@ import Loader from "../Loader/MyLoader";
 function Product() {
   const [products, setProducts] = useState([]); //initialize products as an empty array to ensure .map() works on the first render, as .map() works on empty arrays — it just returns an empty array.
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     axios
@@ -54,8 +53,12 @@ function Product() {
         <Loader />
       ) : (
         <section className={classes.products_container}>
-          {products?.map((singleProduct) => (
-            <ProductCard product={singleProduct} key={singleProduct.id} />
+          {products.map((singleProduct) => (
+            <ProductCard
+              product={singleProduct}
+              key={singleProduct.id}
+              renderAdd={true}
+            />
           ))}
         </section>
       )}

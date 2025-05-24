@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
 // npm install numeral ------install from Numeral.js for the rating counter
 import { Type } from "../../utils/action.type";
-function ProductCard({ product, flex, renderDesc }) {
+function ProductCard({ product, flex, renderDesc, renderAdd }) {
   const { image, title, id, rating, price, description } = product; //Destructuring the prop "product"
 
   const [state, dispatch] = useContext(DataContext); // import useContext, DataContext from our component and {Type} from utils
@@ -40,9 +40,11 @@ function ProductCard({ product, flex, renderDesc }) {
           {/* price */}
           <CurrencyFormat amount={price} />
         </div>
-        <button className={classes.button} onClick={addToCart}>
-          add to cart
-        </button>
+        {renderAdd && (
+          <button className={classes.button} onClick={addToCart}>
+            add to cart
+          </button>
+        )}
       </div>
     </div>
   );

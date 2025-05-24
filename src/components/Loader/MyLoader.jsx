@@ -13,7 +13,7 @@ function Loader() {
       <BarLoader
         color="#6d96ed"
         cssOverride={{}}
-        height={5}
+        height={2.5}
         speedMultiplier={1}
         width={800}
       />
