@@ -9,9 +9,8 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
 import { useReducer } from "react";
 function Header() {
-  // const [state,dispatch]=useContext(DataContext)
-  const [{ basket }, dispatch] = useContext(DataContext); // Destructuring "state"
-
+  // const [state,dispatch]=useContext(DataContext) // Destructuring "state" we can access basket as used below
+  const [{ basket }, dispatch] = useContext(DataContext);
   return (
     <>
       <section className={classes.fixed}>
@@ -22,7 +21,7 @@ function Header() {
               <Link to="/">
                 <img src={amazonLogo} alt="amazon logo" />
               </Link>
-              {/* Logo image sourced from pngimg.com */}
+              {/* Logo image sourced from assets pngimg.com */}
               <div className={classes.delivery}>
                 <span>
                   <SlLocationPin />

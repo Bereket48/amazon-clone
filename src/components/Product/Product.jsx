@@ -4,30 +4,7 @@ import ProductCard from "./ProductCard";
 import classes from "./Product.module.css";
 import Loader from "../Loader/MyLoader";
 //npm i axios----install axios and import it above
-// function Product() {
-//   const [products, setProducts] = useState([]);
-//   useEffect(() => {
-//     axios
-//       .get("https://fakestoreapi.com/products")
-//       .then((res) => {
-//         setProducts(res.data);
-//       })
-//       .catch((err) => {
-//         console.log(err);**********************************************************Minimum required code, until Detail page routing (and the first 4 imports only)
-//       });
-//   }, []);
 
-//   return (
-//     <section className={classes.products_container}>
-//       {products.map((singleProduct) => {
-//         return <ProductCard product={singleProduct} key={singleProduct.id} />;
-//       })}
-//     </section>
-//   );
-// }
-// export default Product;
-
-//Better advanced syntax
 function Product() {
   const [products, setProducts] = useState([]); //initialize products as an empty array to ensure .map() works on the first render, as .map() works on empty arrays — it just returns an empty array.
   const [isLoading, setIsLoading] = useState(true);
