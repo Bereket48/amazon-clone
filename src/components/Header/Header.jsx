@@ -7,6 +7,7 @@ import { BiCart } from "react-icons/bi";
 import amazonLogo from "../../assets/pngimg.com - amazon_PNG11.png"; // We need this unless we use a direct url in the img's src.
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
+import { useReducer } from "react";
 function Header() {
   // const [state,dispatch]=useContext(DataContext)
   const [{ basket }, dispatch] = useContext(DataContext); // Destructuring "state"
@@ -57,7 +58,7 @@ function Header() {
                 <span>Account & Lists</span>
               </Link>
               <Link to="/orders">
-                <p>returns</p>
+                <p>Returns</p>
                 <span>& Orders</span>
               </Link>
               <Link to="/cart" className={classes.cart}>
