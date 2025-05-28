@@ -1,18 +1,30 @@
-import { useState } from "react";
+import { useContext, useEffect } from "react";
 import "./App.css";
-import Header from "./components/Header/Header";
-import CarouselEffect from "./components/Carousel/CarouselEffect"; //I used CarouselEffect than Carousel b/c he updated it to this
-import Category from "./components/Category/Category";
-import Product from "./components/Product/Product";
 import Routing from "./Router";
+import { DataContext } from "./components/DataProvider/DataProvider";
+import { Type } from "./utils/action.type";
+import { auth } from "./utils/firebase";
 
 function App() {
+  const [{ user }, dispatch] = useContext(DataContext);
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        //console.log(authUser);
+        dispatch({
+          type: Type.SET_USER,
+          user: authUser,
+        });
+      } else {
+        dispatch({
+          type: Type.SET_USER,
+          user: null,
+        });
+      }
+    });
+  }, []);
   return (
     <>
-      {/* <Header />
-      <CarouselEffect /> ....these three lines are replaced with Landing component which is embeded with LayOut component
-      <Category />
-      <Product /> */}
       <Routing />
     </>
   );

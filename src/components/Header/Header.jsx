@@ -7,10 +7,10 @@ import { BiCart } from "react-icons/bi";
 import amazonLogo from "../../assets/pngimg.com - amazon_PNG11.png"; // We need this unless we use a direct url in the img's src.
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
-import { useReducer } from "react";
+import { auth } from "../../utils/firebase";
 function Header() {
   // const [state,dispatch]=useContext(DataContext) // Destructuring "state" we can access basket as used below
-  const [{ basket }, dispatch] = useContext(DataContext);
+  const [{ basket, user }, dispatch] = useContext(DataContext);
   return (
     <>
       <section className={classes.fixed}>
@@ -38,7 +38,7 @@ function Header() {
                 <option value="">All</option>
               </select>
               <input type="text" />
-              <BsSearch size={25} />
+              <BsSearch size={38} />
             </div>
             {/* other section */}
             <div className={classes.order_container}>
@@ -47,14 +47,24 @@ function Header() {
                   src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1024px-Flag_of_the_United_States.svg.png"
                   alt=""
                 />
-
                 <select name="" id="">
                   <option value="">EN</option>
                 </select>
               </Link>
-              <Link to="/auth">
-                <p>Sign In</p>
-                <span>Account & Lists</span>
+              <Link to={user ? "#" : "/auth"}>
+                <div>
+                  {user ? (
+                    <>
+                      <p>Hello {user?.email?.split("@")[0]}</p>
+                      <span onClick={() => auth.signOut()}>Sign Out</span>
+                    </>
+                  ) : (
+                    <>
+                      <p>Hello, Sign In</p>
+                      <span>Account & Lists</span>
+                    </>
+                  )}
+                </div>
               </Link>
               <Link to="/orders">
                 <p>Returns</p>

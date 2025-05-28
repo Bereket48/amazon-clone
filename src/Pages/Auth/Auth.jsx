@@ -1,8 +1,69 @@
 import React from "react";
 import classes from "./SignUp.module.css";
 import { Link } from "react-router-dom";
-
+import { auth } from "../../utils/firebase";
+import { useState, useContext } from "react";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { DataContext } from "../../components/DataProvider/DataProvider";
+import { Type } from "../../utils/action.type";
+import { ClipLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom"; //Another method of routing into a page (~)
 function Auth() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState({ signIn: false, signUp: false });
+
+  // console.log(password, email);
+
+  const [{ user, basket }, dispatch] = useContext(DataContext);
+  const navigate = useNavigate();
+
+  const authHandler = async (e) => {
+    e.preventDefault();
+
+    // console.log(e.target.name);
+    if (e.target.name === "signin") {
+      setLoading({ ...loading, signIn: true });
+      //firebase auth
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+          //userInfo is a variable representing user data coming from google's firebase
+          // console.log(userInfo);
+          dispatch({
+            type: Type.SET_USER,
+            user: userInfo.user,
+          });
+          setLoading({ ...loading, signIn: false });
+          navigate("/");
+        })
+        .catch((err) => {
+          // console.log(err);
+          setError(err.message);
+          setLoading({ ...loading, sign: true });
+        });
+    } else {
+      setLoading({ ...loading, signUp: true });
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userInfo) => {
+          console.log(userInfo);
+          dispatch({
+            type: Type.SET_USER,
+            user: userInfo.user,
+          });
+          setLoading({ ...loading, signIn: false });
+          navigate("/");
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading({ ...loading, signUp: true });
+        });
+    }
+  };
+
   return (
     <section className={classes.login}>
       {/* Logo */}
@@ -19,14 +80,33 @@ function Auth() {
         <form>
           <div>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" />
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              id="email"
+            />
           </div>
           <div>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              id="password"
+            />
           </div>
-          <button className={classes.login_signInButton} type="submit">
-            Sign In
+          <button
+            onClick={authHandler}
+            className={classes.login_signInButton}
+            type="submit"
+            name="signin"
+          >
+            {loading.signIn ? (
+              <ClipLoader color="#000" size={15}></ClipLoader>
+            ) : (
+              "Sign In"
+            )}
           </button>
         </form>
         <p>
@@ -35,9 +115,21 @@ function Auth() {
           Interest-Based Ads Notice.
         </p>
         {/* create account btn */}
-        <button className={classes.login_registerButton}>
-          Create your Amazon Account
+        <button
+          onClick={authHandler}
+          className={classes.login_registerButton}
+          type="submit"
+          name="signup"
+        >
+          {loading.signUp ? (
+            <ClipLoader color="#000" size={15}></ClipLoader>
+          ) : (
+            "Create your Amazon Account"
+          )}
         </button>
+        {error && (
+          <small style={{ paddingTop: "5px", color: "red" }}>{error}</small>
+        )}
       </div>
     </section>
   );

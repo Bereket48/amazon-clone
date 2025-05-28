@@ -36,12 +36,12 @@ export const db = app.firestore();
 
 // // Your Firebase configuration
 // const firebaseConfig = {
-//   apiKey: "AIzaSyA2Rhy0C_8dQ5xbY3qVmZ409c11L1rXwRg",
-//   authDomain: "clone-2eb37.firebaseapp.com",
-//   projectId: "clone-2eb37",
-//   storageBucket: "clone-2eb37.appspot.com",
-//   messagingSenderId: "961007279109",
-//   appId: "1:961007279109:web:26ec5b1b8b78bb95e5506c",
+//   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+//   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+//   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+//   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+//   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+//   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 // };
 
 // // Initialize Firebase
