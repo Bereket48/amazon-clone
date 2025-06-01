@@ -11,6 +11,7 @@ import { DataContext } from "../../components/DataProvider/DataProvider";
 import { Type } from "../../utils/action.type";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom"; //Another method of routing into a page (~)
+import { useLocation } from "react-router-dom";
 function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +22,7 @@ function Auth() {
 
   const [{ user, basket }, dispatch] = useContext(DataContext);
   const navigate = useNavigate();
+  const navStateData = useLocation();
 
   const authHandler = async (e) => {
     e.preventDefault();
@@ -38,7 +40,8 @@ function Auth() {
             user: userInfo.user,
           });
           setLoading({ ...loading, signIn: false });
-          navigate("/");
+          // navigate("/");
+          navigate(navStateData?.state?.redirect || "/");
         })
         .catch((err) => {
           // console.log(err);
@@ -55,7 +58,7 @@ function Auth() {
             user: userInfo.user,
           });
           setLoading({ ...loading, signIn: false });
-          navigate("/");
+          navigate(navStateData?.state?.redirect || "/");
         })
         .catch((err) => {
           setError(err.message);
@@ -77,7 +80,19 @@ function Auth() {
       {/* Form */}
       <div className={classes.login_container}>
         <h1>Sign In</h1>
-        <form>
+        {navStateData?.state?.msg && (
+          <small
+            style={{
+              padding: "5px",
+              textAlign: "center",
+              color: "red",
+              fontWeight: "bold",
+            }}
+          >
+            {navStateData?.state?.msg}
+          </small>
+        )}
+        <form action="">
           <div>
             <label htmlFor="email">Email</label>
             <input

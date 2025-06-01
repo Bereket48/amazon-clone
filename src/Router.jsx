@@ -11,6 +11,7 @@ import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 // Imports & setup for Stripe payment integration
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 const stripePromise = loadStripe(
   "pk_test_51RTpbzIKxQwvWyaB54l42Ll2if9KC5zLz02OJnLsKvwTKNMzyJigRrkcGMkiFqkOc8coU1qK3K2N0CUnS6cGuYuV00vb1va27l"
 );
@@ -27,13 +28,30 @@ function Routing() {
         <Route
           path="/payments"
           element={
-            <Elements stripe={stripePromise}>
-              <Payment />
-            </Elements>
+            <ProtectedRoute
+              msg={"You must log in to pay"}
+              redirect={"/payments"}
+            >
+              <Elements stripe={stripePromise}>
+                <Payment />
+              </Elements>
+            </ProtectedRoute>
           }
         />
         {/* Wrapping the "Payment" component above with "CheckoutProvider" is a Stripe payment setup set in their documentation*/}
-        <Route path="/orders" element={<Orders />} />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute
+              msg={"You must log in to access your orders"}
+              redirect={"/orders"}
+            >
+              <Elements stripe={stripePromise}>
+                <Orders />
+              </Elements>
+            </ProtectedRoute>
+          }
+        />
         <Route path="/category/:BereketEndPoint" element={<Results />} />
         {/* Here we are saying whenever anything comes after "/category/", then route to the "Results" page. 
         The variable BereketEndPoint gets dynamic values either from what a user writes or from a clicked route from the CategoryCard, which maps and take varying data on it's four d/t components.*/}
