@@ -46,7 +46,7 @@ function Auth() {
         .catch((err) => {
           // console.log(err);
           setError(err.message);
-          setLoading({ ...loading, sign: true });
+          setLoading({ ...loading, signIn: true });
         });
     } else {
       setLoading({ ...loading, signUp: true });

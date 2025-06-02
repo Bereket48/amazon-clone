@@ -137,6 +137,13 @@
   border-radius: 3px;
 }
 
+/* Lately added hover effect on the SIgnIn/ SignOut button (code not from lesson)*/
+.authSection:hover {
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+
 .lower_container {
   background-color: #232f3e;
   color: white;

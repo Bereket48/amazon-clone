@@ -8,6 +8,8 @@ import amazonLogo from "../../assets/pngimg.com - amazon_PNG11.png"; // We need 
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
 import { auth } from "../../utils/firebase";
+import { Type } from "../../utils/action.type";
+
 function Header() {
   // const [state,dispatch]=useContext(DataContext) // Destructuring "state" we can access basket as used below
   const [{ basket, user }, dispatch] = useContext(DataContext);
@@ -51,7 +53,7 @@ function Header() {
                   <option value="">EN</option>
                 </select>
               </Link>
-              <Link to={user ? "#" : "/auth"}>
+              {/* <Link to={user ? "#" : "/auth"}> 
                 <div>
                   {user ? (
                     <>
@@ -65,7 +67,50 @@ function Header() {
                     </>
                   )}
                 </div>
-              </Link>
+              </Link> */}
+              {/* ************************************The block above worked fine but the Link to=...."#" needed improvement (code from lesson)*/}
+              {/* {user ? (
+                <div
+                  className={classes.authSection} //******************Needed some additions on the Header.module.css file to add the hover effect
+                  onClick={() => auth.signOut()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p>Hello {user?.email?.split("@")[0]}</p>
+                  <span>Sign Out</span>
+                </div>
+              ) : (
+                <Link to="/auth" className={classes.authSection}> 
+                  <p>Hello, Sign In</p>
+                  <span>Account & Lists</span>
+                </Link> 
+              )} */}
+              {/* ************************************Link is only utilized when there isn't a logged in user. But this block of code still needs improvement to add functionality that clears off items in the cart when a user logs out. ((block of code not from lesson))*/}
+              {user ? (
+                <div
+                  className={classes.authSection}
+                  onClick={() => {
+                    //****************************Does three things on SignOut, empties local storage, empties basket state and logs the user out  (block of code not from lesson)*/
+                    // Clear cart in context state
+                    dispatch({ type: Type.EMPTY_BASKET });
+
+                    // Remove cart from localStorage
+                    localStorage.removeItem("basket");
+
+                    // Sign out
+                    auth.signOut();
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  <p>Hello {user?.email?.split("@")[0]}</p>
+                  <span>Sign Out</span>
+                </div>
+              ) : (
+                <Link to="/auth" className={classes.authSection}>
+                  <p>Hello, Sign In</p>
+                  <span>Account & Lists</span>
+                </Link>
+              )}
+
               <Link to="/orders">
                 <p>Returns</p>
                 <span>& Orders</span>
