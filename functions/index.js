@@ -12,7 +12,6 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 // Create Express app
 const app = express();
-
 // Middleware
 app.use(cors({ origin: true }));
 app.use(express.json());
@@ -54,8 +53,12 @@ app.post("/payment/create", async (req, res) => {
   }
 });
 
-// Export the entire Express app as a Firebase Function
-exports.api = onRequest(app); //!!!This line should come after all route definitions sothat they would be registered with the app when it's exported.
+// Export the entire Express app as a Firebase Function !!!This line should come after all route definitions so that they would be registered with the app when it's exported.
+// exports.api = onRequest(app); //This creates a Cloud Function with the default access settings. By default, Cloud Functions (v2) restrict access and require authentication (like Firebase Auth or IAM permissions) unless explicitly made public.
+exports.api = onRequest({ invoker: "public" }, app); //This explicitly sets the function’s invoker policy to “public”, meaning anyone on the internet can call it without needing authentication.
 
-// This allows us to build a REST API using Express and deploy it as a single Firebase function. When deployed, our endpoint would look like: https://<your-region>-<your-project>.cloudfunctions.net/api
+// The last two codes allow us to build a REST API using Express and deploy it as a single Firebase function. When deployed, our endpoint would look like: https://<your-region>-<our-project>.cloudfunctions.net/api
 // ** Basing the script "serve": "firebase emulators:start --only functions" found in our json.package, we use "npm run serve" to start firebase runner. We can now install and use vsc extensions such as "Thunder client" to test/run our api from the emulator. Thunder client is a lightweight and fast REST API client extension. It’s designed to help developers test APIs (like RESTful or GraphQL APIs) directly within the VS Code editor, without needing to switch to an external tool like Postman or Insomnia.
+
+
+
