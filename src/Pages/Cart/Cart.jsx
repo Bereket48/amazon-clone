@@ -85,9 +85,3 @@ function Cart() {
 }
 
 export default Cart;
-
-// let a =[1,2,3]
-// let result = a.reduce((pre, curr)=>{
-//   return pre+curr
-// })
-// console.log(result);

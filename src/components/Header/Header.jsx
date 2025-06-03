@@ -4,7 +4,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { BsSearch } from "react-icons/bs";
 import LowerHeader from "./LowerHeader";
 import { BiCart } from "react-icons/bi";
-import amazonLogo from "../../assets/pngimg.com - amazon_PNG11.png"; // We need this unless we use a direct url in the img's src.
+import amazonLogo from "../../assets/amazonLogo.png"; // We need this unless we use a direct url in the img's src.
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
 import { auth } from "../../utils/firebase";
