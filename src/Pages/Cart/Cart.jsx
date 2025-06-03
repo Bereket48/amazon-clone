@@ -1,6 +1,6 @@
 import React, { useContext, useReducer } from "react";
 import classes from "./Cart.module.css";
-import Layout from "../../components/Layout/Layout";
+import Layout from "../../components/LayOut/LayOut";
 import { DataContext } from "../../components/DataProvider/DataProvider";
 import ProductCard from "../../components/Product/ProductCard";
 import CurrencyFormat from "../../components/CurrencyFormat/CurrencyFormat";

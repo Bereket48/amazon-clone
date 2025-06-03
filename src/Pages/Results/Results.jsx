@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Results.module.css";
-import Layout from "../../components/Layout/Layout";
+// import Layout from "../../components/Layout/Layout";//Caused Netlify deployment problem
+import Layout from "../../components/LayOut/LayOut"
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { productUrl } from "../../Api/endPoints"; //Our base url defined in Api endpoint.js
